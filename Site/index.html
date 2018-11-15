@@ -7,17 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <style>
+body {
+    background-color: linen;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    color: maroon;
+    margin-left: 40px;
+}
+form {
+    text-align: center;
+}
+
+        </style>
 </head>
 <body>
     <h1>Welkom bij *UCloud*</h1>
     <img src="../Images/ucloud.png" alt="ucloud">
-    <p>
+    <p class="form">
         <form action="/action_page.php">
             inlogname:<br>
-            <input type="text" name="firstname" value="Mickey">
+            <input type="text" name="firstname" placeholder="Vul hier uw wachtwoord in">
             <br>
             wachtwoord:<br>
-            <input type="password" name="lastname" value="Mouse">
+            <input type="password" name="lastname" placeholder="Vul hier uw wachtwoord in">
             <br><br>
             <input type="submit" value="Submit">
         </form> 
