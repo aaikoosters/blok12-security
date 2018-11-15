@@ -1,7 +1,23 @@
-DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS actions;
+DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE Users(
+CREATE TABLE users(
 id INT AUTO_INCREMENT PRIMARY KEY,
 un VARCHAR(1000),
 pw VARCHAR(1000)
+);
+
+CREATE TABLE sessions(
+id INT AUTO_INCREMENT PRIMARY KEY,
+user_id int,
+expired tinyint,
+time DateTime
+);
+
+CREATE TABLE actions(
+id INT AUTO_INCREMENT PRIMARY KEY,
+sesison_id int,
+time DateTime,
+url VARCHAR(1000)
 );
