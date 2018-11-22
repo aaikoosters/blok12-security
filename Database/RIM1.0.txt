@@ -11,6 +11,7 @@ pw VARCHAR(1000)
 CREATE TABLE sessions(
 id INT AUTO_INCREMENT PRIMARY KEY,
 user_id int,
+sessiontoken varchar(50),
 expired tinyint,
 time DateTime
 );
