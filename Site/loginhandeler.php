@@ -16,11 +16,11 @@ if ($username == $hcun)
     }
     else
     {
-        header('Location: secondpage.html');
+        header('Location: secondpage.php');
     }
 }
 else
 {
-    header('Location: secondpage.html');
+    header('Location: secondpage.php');
 }
 ?>
