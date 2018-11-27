@@ -1,24 +1,32 @@
 <?php
-
-$hcpw = password_hash("2", PASSWORD_BCRYPT, ['cost' => 12]); //12 is cost, 2 is pw
-
-$hcun = 1;
-
+$un = $_POST['username'];
+$pwtry = $_POST['password'];
+$realpw = null;
 SESSION_START();
-$username = $_POST['username'];
-$password = $_POST['password'];
+
 include 'datacontrollers/dbconnector.php';
-$conn->close();
-if ($username == $hcun)
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("SELECT pw FROM users WHERE un = ?"); 
+    $stmt->execute([$un]);
+
+    // set the resulting array to associative
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+    //print_r($stmt->fetchall());
+	foreach($stmt->fetchall() as $array)
+	{
+			$realpw = $array["pw"];
+	}
+}
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+$conn = null;
+if (password_verify($pwtry, $realpw))
 {
-    if (password_verify($password, $hcpw))
-    {
-        header('Location: portal.html');
-    }
-    else
-    {
-        header('Location: secondpage.php');
-    }
+    header('Location: portal.html');
 }
 else
 {
