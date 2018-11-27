@@ -7,7 +7,8 @@ $hcun = 1;
 SESSION_START();
 $username = $_POST['username'];
 $password = $_POST['password'];
-
+include 'datacontrollers/dbconnector.php';
+$conn->close();
 if ($username == $hcun)
 {
     if (password_verify($password, $hcpw))
