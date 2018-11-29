@@ -46,23 +46,23 @@
 <?php
 function name()
 {
-    switch (rand(1, 10)){
-    case 1:
+    switch (rand(1, 3)){
+    case 4:
     return "LUL";
     break;
-    case 2:
+    case 5:
     return "HOER";
     break;
-    case 3:
+    case 1:
     return "LOSER";
     break;
-    case 4:
+    case 2:
     return "DEBIEL";
     break;
-    case 5:
+    case 6:
     return "KUT";
     break;
-    case 6:
+    case 5:
     return "BIER";
     break;
     case 7:
@@ -74,7 +74,7 @@ function name()
     case 9:
     return "DORST?";
     break;
-    case 10:
+    case 3:
     return "INBREKER";
     break;
     }
