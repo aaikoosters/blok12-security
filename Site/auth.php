@@ -17,8 +17,8 @@ try {
     //print_r($stmt->fetchall());
 	foreach($stmt->fetchall() as $array)
 	{
-		/*if(true)//$array["time"])
-		{*/
+		//if($array["time"] >= $date->modify('-1 day');)
+		//{
 			$user_id = $array["user_id"];
 		//}
 		echo $user_id;
