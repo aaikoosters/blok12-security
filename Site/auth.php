@@ -9,7 +9,7 @@ $user_id = null;
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT user_id FROM sessions WHERE sessiontoken = ? AND expired = 0");
+    $stmt = $conn->prepare("SELECT user_id, time FROM sessions WHERE sessiontoken = ? AND expired = 0");
     $stmt->execute([$oldtoken]);
 
     // set the resulting array to associative
@@ -17,8 +17,11 @@ try {
     //print_r($stmt->fetchall());
 	foreach($stmt->fetchall() as $array)
 	{
+		/*if(true)//$array["time"])
+		{*/
 			$user_id = $array["user_id"];
-			echo $user_id;
+		//}
+		echo $user_id;
 	}
 }
 catch(PDOException $e) {
