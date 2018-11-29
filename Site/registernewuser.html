@@ -5,40 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>UCloud</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
-    <style>
-body {
-    background-color: linen;
-    text-align: center;
-    margin-top: 50px;
-}
-
-h1 {
-    color: maroon;
-    margin-left: 40px;
-}
-form {
-    text-align: center;
-}
-
-        </style>
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheet12.css" />
 </head>
 <body>
-    <h1>Registreer bij *UCloud*</h1>
+
+    <h1>Registreer bij</h1>
     <img src="/Images/ucloud.png" alt="ucloud">
-    <p class="form">
-        <form action="/register.php" method="POST">
-            inlogname:<br>
-            <input type="text" name="username" placeholder="Vul hier uw username in">
-            <br>
-            wachtwoord:<br>
-            <input type="password" name="password" placeholder="Vul hier uw wachtwoord in">
-            <br>
-            <br>
-            <input type="submit" value="Submit">
-        </form> 
-    </p>
-    <a href="index.html">Terug naar login?</a>
+		<p class="form">
+			<form action="/register.php" method="POST">
+				<div class="row">
+					<div class="col-25">
+						<label for="Inlogname">Inlogname:</label>
+					</div>
+					<div class="col-75">
+						<input type="text" name="username" placeholder="Vul hier uw username in">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-25">
+						<label for="Wachtwoord">Wachtwoord:</label>
+					</div>
+					<div class="col-75">
+						<input type="password" name="password" placeholder="Vul hier uw wachtwoord in">
+					</div>
+				</div>
+				
+				<div class="row">
+					<input type="submit" value="Submit">
+				</div>
+			</form> 
+		</p>
+    <a href="index.html" class="myButton">Terug naar login</a>
 </body>
 </html>

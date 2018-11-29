@@ -55,7 +55,7 @@ if (password_verify($pwtry, $realpw))
     echo $sql . "<br>" . $e->getMessage();
     }
 	$conn = null;
-    header('Location: portal.html');
+    header('Location: portal.php');
 }
 else
 {
