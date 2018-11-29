@@ -2,7 +2,6 @@
 $un = $_POST['username'];
 $pwtry = $_POST['password'];
 $alreadyinuse = false;
-SESSION_START();
 
 include 'datacontrollers/dbconnector.php';
 
@@ -27,6 +26,7 @@ try {
 	$stmt->execute([$un, password_hash("$pwtry", PASSWORD_BCRYPT, ['cost' => 12])]);
 	
     //echo "New record created successfully";
+	header('Location: index.html');
 	}
 	else
 	{

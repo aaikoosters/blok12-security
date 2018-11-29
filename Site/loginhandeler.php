@@ -2,7 +2,6 @@
 $un = $_POST['username'];
 $pwtry = $_POST['password'];
 $realpw = null;
-SESSION_START();
 
 include 'datacontrollers/dbconnector.php';
 
@@ -23,13 +22,44 @@ try {
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-$conn = null;
+$realid = null;
+
 if (password_verify($pwtry, $realpw))
 {
+	$newsessiontoken = password_hash(rand(0, 10000000000), PASSWORD_BCRYPT, ['cost' => 12]);
+	try {
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		$stmt = $conn->prepare("SELECT id FROM users WHERE un = ?"); 
+		$stmt->execute([$un]);
+
+		// set the resulting array to associative
+		$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+		//print_r($stmt->fetchall());
+		foreach($stmt->fetchall() as $array)
+		{
+			$realid = $array["id"];
+		}
+
+		$sql = "INSERT INTO sessions (user_id, sessiontoken) VALUES (?,?)";
+		$stmt= $conn->prepare($sql);
+		$stmt->execute([$realid, $newsessiontoken]);
+		
+		//echo "New record created successfully";
+		$_SESSION["token"] = $newsessiontoken;
+		header('Location: index.html');
+	}
+	catch(PDOException $e)
+    {
+    echo $sql . "<br>" . $e->getMessage();
+    }
+	$conn = null;
     header('Location: portal.html');
 }
 else
 {
+	$conn = null;
     header('Location: secondpage.php');
 }
 ?>
