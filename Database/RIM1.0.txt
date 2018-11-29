@@ -22,3 +22,10 @@ sesison_id int,
 time DateTime,
 url VARCHAR(1000)
 );
+
+CREATE TABLE images(
+id INT AUTO_INCREMENT PRIMARY KET,
+user_id int,
+name varchar(1000),
+image blob
+);
