@@ -3,6 +3,8 @@ $un = $_POST['username'];
 $pwtry = $_POST['password'];
 $realpw = null;
 
+session_start();
+
 include 'datacontrollers/dbconnector.php';
 
 try {
@@ -42,12 +44,12 @@ if (password_verify($pwtry, $realpw))
 			$realid = $array["id"];
 		}
 
-		$sql = "INSERT INTO sessions (user_id, sessiontoken) VALUES (?,?)";
+		$sql = "INSERT INTO sessions (user_id, sessiontoken, expired, time) VALUES (?,?,?,?)";
 		$stmt= $conn->prepare($sql);
-		$stmt->execute([$realid, $newsessiontoken]);
+		$stmt->execute([$realid, $newsessiontoken, '0', date("Y-m-d H:i:s")]);
 		
 		//echo "New record created successfully";
-		$_SESSION["token"] = $newsessiontoken;
+		$_SESSION['token'] = $newsessiontoken;
 		header('Location: index.html');
 	}
 	catch(PDOException $e)
@@ -55,7 +57,7 @@ if (password_verify($pwtry, $realpw))
     echo $sql . "<br>" . $e->getMessage();
     }
 	$conn = null;
-    header('Location: portal.html');
+    header('Location: portal.php');
 }
 else
 {

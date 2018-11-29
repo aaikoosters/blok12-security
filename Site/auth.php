@@ -1,5 +1,43 @@
 <?php
 session_start();
-$oldtoken = $_SESSION["token"];
-$_SESSION["token"] = rand(min, max);
+if (isset($_SESSION['token']))
+{
+$oldtoken = $_SESSION['token'];
+include 'datacontrollers/dbconnector.php';
+$user_id = null;
+//haal sessie op
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("SELECT user_id FROM sessions WHERE sessiontoken = ? AND expired = 0");
+    $stmt->execute([$oldtoken]);
+
+    // set the resulting array to associative
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+    //print_r($stmt->fetchall());
+	foreach($stmt->fetchall() as $array)
+	{
+			$user_id = $array["user_id"];
+			echo $user_id;
+	}
+}
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+if(!$user_id)
+{
+	header('Location: secondpage.php');
+}
+
+//creer nieuw sessie token
+
+//sla niew sessie token op
+
+// redirect naar login als t fout gaat
+}
+else
+{
+	header('Location: secondpage.php');
+}
 ?>
