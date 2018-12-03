@@ -28,7 +28,7 @@ $realid = null;
 
 if (password_verify($pwtry, $realpw))
 {
-	$newsessiontoken = password_hash(rand(0, 10000000000), PASSWORD_BCRYPT, ['cost' => 12]);
+	$newsessiontoken = password_hash(rand(0, 10000000), PASSWORD_BCRYPT, ['cost' => 12]);
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

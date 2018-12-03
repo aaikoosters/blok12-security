@@ -1,3 +1,7 @@
+<?php
+	include 'auth.php';
+?>
+
 <html>
 <head>
     <meta charset="utf-8" />
