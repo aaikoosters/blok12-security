@@ -83,7 +83,7 @@ input[type=submit]:hover {
 }
 
 input[type=text], select, textarea {
-    width: 30%;
+    width: 40%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -91,7 +91,7 @@ input[type=text], select, textarea {
 }
 
 input[type=password], select, textarea {
-    width: 30%;
+    width: 40%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -112,18 +112,20 @@ label {
     padding: 20px;
 }
 
-.col-25 {
+.col-40 {
     float: left;
-    width: 25%;
+    width: 40%;
     margin-top: 6px;
     margin-bottom: 6px;
+    text-align: right;
 }
 
-.col-75 {
+.col-60 {
     float: left;
-    width: 75%;
+    width: 60%;
     margin-top: 6px;
     margin-bottom: 6px;
+    text-align: left;
 }
 
 .row:after {
@@ -131,3 +133,21 @@ label {
     display: table;
     clear: both;
 }
+
+
+div.gallery {
+	margin: 8px;
+	border: 1px solid #ccc;
+	float: left;
+}
+div.gallery:hover {
+	border: 1px solid #777;
+}
+div.gallery img {
+	width: 300px;
+	height: 200px;
+}
+div.desc {
+	padding: 10px;
+	text-align: center;
+}	
