@@ -1,5 +1,6 @@
 <?php
 	include 'auth.php';
+	include 'datacontrollers/dbconnector.php';
 ?>
 
 <html>
@@ -19,11 +20,8 @@
 			<div class="row">
 				<input type="file" name="image">
 			</div>
-
-			<br/>
-					
 			<div class="row">
-				<input type="submit" value="Submit">
+				<input type="submit" name="submit" value="Submit">
 			</div>
 			
 		</form>
@@ -31,25 +29,22 @@
 	
 <br/>
 
-
 <?php
-	$servername = "127.0.0.1:3307";
-	$username = "root";
-	$password = "JkCzA1eXa4NBxFwRDnPLbGykHS2KzXSbD9JMZIrrVDlUhat058rHu6RVVLqpMDEWltKnnbdRK9QFf9JE7RvoJjDSDTD05i1U9oVMckW0cdz2vS9L8jbV6hRcKVHA4akSsCY8zYRy4iLsNGEYD9XD1NSdy0GBvuRCHv5TPbwE7uEvNyAOazMr0DaDhYduNnl8HkbTEhhm37mMeaWBvDNVtUdmNXOmJ8Ka9fILwUsiLaHdQiO3HHdyhz8Zf0388exo";
-	$dbname = "blok12db";
-
 	// Create connection
 	$dsn ="mysql:host=$servername;dbname=$dbname;";
 	$db = new PDO($dsn, $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		
-	$stat = $db->prepare("SELECT * FROM images");
+	$stat = $db->prepare("SELECT * FROM images WHERE user_id=?");
+	$stat->bindParam(1, $user_id);
 	$stat->execute();
     while ($row = $stat->fetch()) {
-      echo "<div class='gallery'>";
-      	echo "<img src=display_image.php?id=".$row['id']." alt=".$row['name'].">";
-      echo "<br/>";
-		echo "<input type=\"submit\" value=\"Delete image\">";
-      echo "</div>";
+	echo "<div class='gallery'>";
+		echo "<img src=display_image.php?id=".$row['id']." alt=".$row['name'].">";
+		echo "<br\>";
+		echo "<div class='desc'>";
+			echo "<input type=\"submit\" value=\"Delete image\">";
+		echo "</div>";
+	echo "</div>";
     }
 ?>
 
