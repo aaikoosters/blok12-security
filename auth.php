@@ -21,7 +21,6 @@ try {
 		//{
 			$user_id = $array["user_id"];
 		//}
-		echo $user_id;
 	}
 }
 catch(PDOException $e) {
