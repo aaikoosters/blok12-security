@@ -22,7 +22,6 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				strtolower( $name_ext ) == 'jpeg' || 
 				strtolower( $name_ext ) == 'png' 
 			) &&
-			( $uploaded_size < 100000 ) &&
 			( $mimi == 'image/jpeg' || $mimi == 'image/png' ) &&
 			getimagesize( $data ) ) 
 		{ //The uploaded file is an image
