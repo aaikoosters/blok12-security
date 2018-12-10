@@ -11,7 +11,6 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$name_ext = substr( $name, strrpos( $name, '.' ) + 1);
 		$mimi = $_FILES['image']['type'];
 		$data = $_FILES['image']['tmp_name'];
-		$uploaded_size = $_FILES[ 'image' ][ 'size' ];
 		
 		//We make a tmp image to upload
 		$temp_file = ( ( ini_get( 'upload_tmp_dir' ) == '' ) ? ( sys_get_temp_dir() ) : ( ini_get( 'upload_tmp_dir' ) ) );
@@ -34,14 +33,13 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				imagepng( $img, $temp_file, 9);
 			}
 			imagedestroy( $img );
-		
 			//Create a prepare statement to talk to the database
 			$userId = $user_id;
 			$stmt = $db->prepare("INSERT INTO images VALUES('', ?, ?, ?, ?)");
 			$stmt->bindParam(1, $userId);
 			$stmt->bindParam(2, $name);
 			$stmt->bindParam(3, $mimi);
-			$stmt->bindParam(4, $temp_file);
+			$stmt->bindParam(4, file_get_contents($temp_file));
 			$stmt->execute();
 			
 			if (!$stmt) {
