@@ -9,4 +9,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
 
+$logmessage = "database connected";
+	include 'super secret logging file.php';
+
 ?>

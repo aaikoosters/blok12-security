@@ -1,7 +1,7 @@
 <?php
 if (!isset($logmessage))
 {
-	$logmessage = null;
+	$logmessage = "no information available";
 }
 if (!isset($session_id))
 {
@@ -26,4 +26,5 @@ try {
     echo $sql . "<br>" . $e->getMessage();
     }
 	$conn = null;
+	$logmessage = null;
 ?>
