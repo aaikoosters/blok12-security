@@ -9,14 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>UCloud</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheetBlock12.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheetBlock12.css" />
 </head>
 <body>
     <h1>Welkom bij *UCloud*</h1>
-    <img src="/Images/ucloud.png" alt="ucloud">
+    <img src="Images/ucloud.png" alt="ucloud">
 	
 	<p class="form">
-		<form method="POST" action="/Upload_image.php" enctype="multipart/form-data">
+		<form method="POST" action="Upload_image.php" enctype="multipart/form-data">
 			<div class="row">
 				<input type="file" name="image">
 			</div>
