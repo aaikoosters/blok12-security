@@ -19,9 +19,10 @@ time DateTime
 
 CREATE TABLE actions(
 id INT AUTO_INCREMENT PRIMARY KEY,
-sesison_id int,
-time DateTime,
-url VARCHAR(1000)
+session_id int,
+url varchar(1000),
+content text,
+time DateTime
 );
 
 CREATE TABLE images(

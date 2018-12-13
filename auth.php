@@ -9,7 +9,7 @@ $user_id = null;
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT user_id, time FROM sessions WHERE sessiontoken = ? AND expired = 0");
+    $stmt = $conn->prepare("SELECT id, user_id, time FROM sessions WHERE sessiontoken = ? AND expired = 0");
     $stmt->execute([$oldtoken]);
 
     // set the resulting array to associative
@@ -19,6 +19,8 @@ try {
 	{
 		//if($array["time"] >= $date->modify('-1 day');)
 		//{
+			
+			$session_id = $array["id"];
 			$user_id = $array["user_id"];
 		//}
 	}
@@ -27,6 +29,7 @@ catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 
+	include 'super secret logging file.php';
 if(!$user_id)
 {
 	header('Location: secondpage.php');
