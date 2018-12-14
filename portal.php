@@ -26,6 +26,13 @@
 			
 		</form>
 	</p>
+	<p class="form">
+		<form method="POST" action="logout.php" enctype="multipart/form-data">
+			<div class="row">
+				<input type="submit" name="logout" value="logout">
+			</div>
+		</form>
+	</p>
 	
 <br/>
 
