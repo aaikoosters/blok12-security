@@ -21,6 +21,7 @@ try {
 			$alreadyinuse = true;
 		}
 		if(!$alreadyinuse){
+			$logmessage = "registration succesfull, username: ". $un;
 			$sql = "INSERT INTO users (un, pw) VALUES (?,?)";
 			$stmt= $conn->prepare($sql);
 			$stmt->execute([$un, password_hash("$pwtry", PASSWORD_BCRYPT, ['cost' => 12])]);
@@ -28,10 +29,12 @@ try {
 			//echo "New record created successfully";
 			header('Location: index.html');
 		}else{
+			$logmessage = "This user name is already taken, username: ". $un;
 			echo "This user name is already taken. <br/>";
 			header('Location: registernewuser.html');
 		}
 	} else{
+		$logmessage = "The password field is empty or are not matching, username: ". $un;
 		echo "The password field is empty or are not matching. <br/>";
 		header('Location: registernewuser.html');
 	}
@@ -40,4 +43,5 @@ try {
 }
 $conn = null;
 			
+	include 'super secret logging file.php';
 ?>
