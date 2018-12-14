@@ -15,4 +15,7 @@ $row = $stat->fetch();
 
 header("Content-Type:".$row['mimi']);
 echo $row['image'];
+$logmessage = "display image: ".$idImage;
+
+	include 'super secret logging file.php';
 ?>

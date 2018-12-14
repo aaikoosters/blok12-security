@@ -28,7 +28,7 @@ try {
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
+	$logmessage = "authenticated";
 	include 'super secret logging file.php';
 if(!$user_id)
 {
