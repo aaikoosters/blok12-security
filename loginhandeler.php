@@ -44,9 +44,9 @@ if (password_verify($pwtry, $realpw))
 			$realid = $array["id"];
 		}
 
-		$sql = "INSERT INTO sessions (user_id, sessiontoken, expired, time) VALUES (?,?,?,?)";
+		$sql = "INSERT INTO sessions (user_id, sessiontoken, expired, time, expiration) VALUES (?,?,?,?,?)";
 		$stmt= $conn->prepare($sql);
-		$stmt->execute([$realid, $newsessiontoken, '0', date("Y-m-d H:i:s")]);
+		$stmt->execute([$realid, $newsessiontoken, '0', date("Y-m-d H:i:s"), date("Y-m-d H:i:s", strtotime('+ 5 minute'))]);
 		
 		//echo "New record created successfully";
 		$_SESSION['token'] = $newsessiontoken;
