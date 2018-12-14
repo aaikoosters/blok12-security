@@ -51,15 +51,11 @@ if (password_verify($pwtry, $realpw))
 
 		$sql = "INSERT INTO sessions (user_id, sessiontoken, expired, time, expiration) VALUES (?,?,?,?,?)";
 		$stmt= $conn->prepare($sql);
-<<<<<<< HEAD
 		$stmt->execute([$realid, $newsessiontoken, '0', date("Y-m-d H:i:s"), date("Y-m-d H:i:s", strtotime('+ 5 minute'))]);
-=======
-		$stmt->execute([$realid, $newsessiontoken, '0', date("Y-m-d H:i:s")]);
 
 		$sql ="UPDATE users SET attempt='' WHERE un= ?";
 		$stmt= $conn->prepare($sql);
 		$stmt->execute([$un]);
->>>>>>> origin/develop
 		
 		//echo "New record created successfully";
 		$_SESSION['token'] = $newsessiontoken;

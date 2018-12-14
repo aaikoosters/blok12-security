@@ -26,7 +26,9 @@ try {
 
 		if(strlen($pwtry) < 8 || !preg_match("#[0-9]+#", $pwtry) || !preg_match("#[a-zA-Z]+#", $pwtry)){
 			$_SESSION['fout'] = "wachtwoord te kort";
-			header('Location: registererror.php');
+			$logmessage = "wachtwoord te kort, username: ". $un;
+			include 'super secret logging file.php';
+			header('Location: registrererror.php');
 		}
 		elseif(!$alreadyinuse){
 			$logmessage = "registration succesfull, username: ". $un;
@@ -39,12 +41,14 @@ try {
 		}else{
 			$logmessage = "This user name is already taken, username: ". $un;
 			$_SESSION['fout'] = "user name bestaat";
-			header('Location: registererror.php');
+			include 'super secret logging file.php';
+			header('Location: registrererror.php');
 		}
 	} else{
 		$logmessage = "The password field is empty or are not matching, username: ". $un;
 		$_SESSION['fout'] = "no match / empty";
-		header('Location: registererror.php');
+		include 'super secret logging file.php';
+		header('Location: registrererror.php');
 	}
 }catch(PDOException $e){
     echo "<br>" . $e->getMessage();

@@ -9,7 +9,7 @@ $user_id = null;
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT id, user_id, time FROM sessions WHERE sessiontoken = ? AND expired = 0");
+    $stmt = $conn->prepare("SELECT id, user_id, expiration FROM sessions WHERE sessiontoken = ?");
     $stmt->execute([$oldtoken]);
 
     // set the resulting array to associative
@@ -17,12 +17,20 @@ try {
     //print_r($stmt->fetchall());
 	foreach($stmt->fetchall() as $array)
 	{
-		//if($array["time"] >= $date->modify('-1 day');)
-		//{
+		if(new DateTime($array["expiration"]) > new DateTime("now"))
+		{
 			
 			$session_id = $array["id"];
 			$user_id = $array["user_id"];
-		//}
+			$sql ="UPDATE sessions SET expiration=? WHERE id= ?";
+			$stmt= $conn->prepare($sql);
+			$stmt->execute([date("Y-m-d H:i:s", strtotime('+ 5 minute')), $session_id]);
+		}
+		else
+		{
+			$logmessage = "expired session";
+	include 'super secret logging file.php';
+		}
 	}
 }
 catch(PDOException $e) {

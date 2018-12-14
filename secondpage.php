@@ -47,33 +47,11 @@
 function name()
 {
     switch (rand(1, 3)){
-    case 4:
-    return "LUL";
-    break;
-    case 5:
-    return "HOER";
-    break;
     case 1:
     return "LOSER";
     break;
     case 2:
     return "DEBIEL";
-    break;
-    case 6:
-    return "KUT";
-    break;
-    case 5:
-    return "BIER";
-    break;
-    case 7:
-    return "SLET";
-    break;
-    case 8:
-    return "PROSTITUE";
-    break;
-    case 9:
-    return "DORST?";
-    break;
     case 3:
     return "INBREKER";
     break;
