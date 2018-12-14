@@ -4,6 +4,9 @@ $pwtry = $_POST['password'];
 $pwtry2 = $_POST['password2'];
 $alreadyinuse = false;
 
+session_start();
+$_SESSION['fout'] = null;
+
 include 'datacontrollers/dbconnector.php';
 
 try {
@@ -20,7 +23,12 @@ try {
 		foreach($stmt->fetchall() as $array){
 			$alreadyinuse = true;
 		}
-		if(!$alreadyinuse){
+
+		if(strlen($pwtry) < 8 || !preg_match("#[0-9]+#", $pwtry) || !preg_match("#[a-zA-Z]+#", $pwtry)){
+			$_SESSION['fout'] = "wachtwoord te kort";
+			header('Location: registererror.php');
+		}
+		elseif(!$alreadyinuse){
 			$sql = "INSERT INTO users (un, pw) VALUES (?,?)";
 			$stmt= $conn->prepare($sql);
 			$stmt->execute([$un, password_hash("$pwtry", PASSWORD_BCRYPT, ['cost' => 12])]);
@@ -28,12 +36,12 @@ try {
 			//echo "New record created successfully";
 			header('Location: index.html');
 		}else{
-			echo "This user name is already taken. <br/>";
-			header('Location: registernewuser.html');
+			$_SESSION['fout'] = "user name bestaat";
+			header('Location: registererror.php');
 		}
 	} else{
-		echo "The password field is empty or are not matching. <br/>";
-		header('Location: registernewuser.html');
+		$_SESSION['fout'] = "no match / empty";
+			header('Location: registererror.php');
 	}
 }catch(PDOException $e){
     echo "<br>" . $e->getMessage();
