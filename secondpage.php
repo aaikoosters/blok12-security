@@ -13,8 +13,11 @@
     <h4> 
 		<?php	
 		session_start();
+		if(isset($_SESSION['block']))
+		{
 		$foutmelding = $_SESSION['block'];
 		echo names($foutmelding);
+		}
 		?>
 	<h4>
     <h2>
