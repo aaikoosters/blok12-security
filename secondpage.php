@@ -10,6 +10,13 @@
 <body>
     <h1>Welkom bij </h1>
     <img src="Images/ucloud.png" alt="ucloud">
+    <h4> 
+		<?php	
+		session_start();
+		$foutmelding = $_SESSION['block'];
+		echo names($foutmelding);
+		?>
+	<h4>
     <h2>
         <?php
         echo name();
@@ -54,6 +61,15 @@ function name()
     return "DEBIEL";
     case 3:
     return "INBREKER";
+    break;
+    }
+}
+
+function names($foutmelding)
+{
+    switch ($foutmelding){
+    case "block":
+    return "You have been blocked for 5 minute";
     break;
     }
 }

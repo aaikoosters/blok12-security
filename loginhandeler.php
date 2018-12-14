@@ -5,6 +5,7 @@ $realpw = null;
 //$block = FALSE;
 
 session_start();
+$_SESSION['fout'] = null;
 
 include 'datacontrollers/dbconnector.php';
 
@@ -90,6 +91,7 @@ else
 		$blockedTime = substr($status, 2);
 		if(time() < $blockedTime){
 		   $block = true;
+		   $_SESSION['block'] = "block";
 		}else{
 		   // remove the block, because the time limit is over
 		   $sql ="UPDATE users SET attempt= '1' WHERE un= ?";
