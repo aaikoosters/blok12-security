@@ -66,6 +66,8 @@ if (password_verify($pwtry, $realpw))
     echo $sql . "<br>" . $e->getMessage();
     }
 	$conn = null;
+	$logmessage = "loged in, username: ". $un;
+	include 'super secret logging file.php';
     header('Location: portal.php');
 }
 else
@@ -100,6 +102,8 @@ else
 		$stmt->execute([$un]);
 	}
 	
+	$logmessage = "login not succesfull, username: ". $un;
+	include 'super secret logging file.php';
     header('Location: secondpage.php');
 }
 }

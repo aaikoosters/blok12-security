@@ -29,6 +29,7 @@ try {
 			header('Location: registererror.php');
 		}
 		elseif(!$alreadyinuse){
+			$logmessage = "registration succesfull, username: ". $un;
 			$sql = "INSERT INTO users (un, pw) VALUES (?,?)";
 			$stmt= $conn->prepare($sql);
 			$stmt->execute([$un, password_hash("$pwtry", PASSWORD_BCRYPT, ['cost' => 12])]);
@@ -36,16 +37,19 @@ try {
 			//echo "New record created successfully";
 			header('Location: index.html');
 		}else{
+			$logmessage = "This user name is already taken, username: ". $un;
 			$_SESSION['fout'] = "user name bestaat";
 			header('Location: registererror.php');
 		}
 	} else{
+		$logmessage = "The password field is empty or are not matching, username: ". $un;
 		$_SESSION['fout'] = "no match / empty";
-			header('Location: registererror.php');
+		header('Location: registererror.php');
 	}
 }catch(PDOException $e){
     echo "<br>" . $e->getMessage();
 }
 $conn = null;
 			
+	include 'super secret logging file.php';
 ?>
